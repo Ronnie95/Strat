@@ -6,3 +6,6 @@
     <p>Notes: {{ objective.end_date }}</p>
     <p>Notes: {{ objective.progress }}</p>
     <button><a href="{% url 'objective_update' objective.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
+    <button><a href="{% url 'objective_delete' objective.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
+    <button><a href="{% url 'keyresult_create' objective.id%}" class="btn btn-secondary btn-sm">New Key Result</a></button>
+
