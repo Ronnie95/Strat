@@ -90,37 +90,38 @@ class KeyResultCreate(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(ObjectiveCreate, self).form_valid(form)
+        return super(KeyResultCreate, self).form_valid(form)
 
     def get_success_url(self):
         print(self.kwargs)
-        return reverse('objective_detail', kwargs={'pk': self.object.pk})
+        return reverse('keyresult_detail', kwargs={'pk': self.object.pk})
     
 @method_decorator(login_required, name='dispatch')
-class ObjectiveList(TemplateView):
-    template_name = "objectives.html"
+class KeyResultList(TemplateView):
+    template_name = "keyresults.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["Objective"] = Objective.objects.all() # Here we are using the model to query the database for us.
+        context["KeyResult"] = Objective.objects.all() # Here we are using the model to query the database for us.
         return context
     
 
 @method_decorator(login_required, name='dispatch')
-class ObjectiveDetail(DetailView):
-    model = Objective
-    template_name = "objective_detail.html"
+class KeyResultDetail(DetailView):
+    model = KeyResult
+    template_name = "keyresult_detail.html"
     
     def get_queryset(self):
-        return Objective.objects.filter(user=self.request.user)
+        return KeyResult.objects.filter(user=self.request.user)
     
-class ObjectiveUpdate(UpdateView):
-    model = Objective
-    fields = ['title', 'description', 'start_date', 'end_date', 'progress']
-    template_name = "objective_update.html"
-    success_url = "/objectives/"
+class KeyResultUpdate(UpdateView):
+    model = KeyResult
+    fields = ['objective', 'description', 'target_value', 'current_value', 'deadline']
+    template_name = "keyresult_update.html"
+    success_url = "/keyresults/"
 
 class ObjectiveDelete(DeleteView):
     model = Objective
     template_name = "objective_delete.html"
-    success_url = "/objectives/"
+    success_url = "/keyresults/"
+ ##may have to have the success URL be to objectives due to the one to many relationship

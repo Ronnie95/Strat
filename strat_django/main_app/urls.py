@@ -9,6 +9,11 @@ urlpatterns = [
     path('objectives/<int:pk>', views.ObjectiveDetail.as_view(), name='objective_detail'),
     path('objectives/<int:pk>/update', views.ObjectiveUpdate.as_view(), name='objective_update'),
     path('objectives/<int:pk>/delete', views.ObjectiveDelete.as_view(), name='objective_delete'),
-    path('accounts/signup/', views.Signup.as_view(), name="signup")
+    path('accounts/signup/', views.Signup.as_view(), name="signup"),
+    path('keyresults/', views.ObjectiveList.as_view(), name='keyresults'),
+    path('keyresults/new/', views.KeyResultCreate.as_view(), name='objective_create'),
+    path('keyresults/<int:pk>', views.Ke.as_view(), name='objective_detail'),
+    path('keyresults/<int:pk>/update', views.ObjectiveUpdate.as_view(), name='objective_update'),
+    path('keyresults/<int:pk>/delete', views.ObjectiveDelete.as_view(), name='objective_delete'),
 
 ]
