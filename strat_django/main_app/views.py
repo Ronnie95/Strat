@@ -120,7 +120,7 @@ class KeyResultUpdate(UpdateView):
     template_name = "keyresult_update.html"
     success_url = "/keyresults/"
 
-class ObjectiveDelete(DeleteView):
+class KeyResultDelete(DeleteView):
     model = Objective
     template_name = "objective_delete.html"
     success_url = "/keyresults/"
