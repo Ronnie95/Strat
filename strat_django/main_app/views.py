@@ -33,25 +33,25 @@ class ObjectiveList(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["Goals"] = Goals.objects.all() # Here we are using the model to query the database for us.
+        context["Objective"] = Objective.objects.all() # Here we are using the model to query the database for us.
         return context
     
 
 @method_decorator(login_required, name='dispatch')
-class GoalDetail(DetailView):
-    model = Goals
-    template_name = "goal_detail.html"
+class ObjectiveDetail(DetailView):
+    model = Objective
+    template_name = "objective_detail.html"
     
     def get_queryset(self):
-        return Goals.objects.filter(user=self.request.user)
+        return Objective.objects.filter(user=self.request.user)
     
-class GoalUpdate(UpdateView):
-    model = Goals
-    fields = ['goal_name', 'target_amount', 'target_date', 'notes']
-    template_name = "goal_update.html"
-    success_url = "/goal/"
+class ObjectiveUpdate(UpdateView):
+    model = Objective
+    fields = ['title', 'description', 'start_date', 'end_date', 'progress']
+    template_name = "objective_update.html"
+    success_url = "/objectives/"
 
-class GoalDelete(DeleteView):
-    model = Goals
-    template_name = "goal_delete.html"
-    success_url = "/goal/"
+class ObjectiveDelete(DeleteView):
+    model = Objective
+    template_name = "objective_delete.html"
+    success_url = "/objectives/"
