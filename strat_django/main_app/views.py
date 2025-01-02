@@ -121,7 +121,7 @@ class KeyResultUpdate(UpdateView):
     success_url = "/keyresults/"
 
 class KeyResultDelete(DeleteView):
-    model = Objective
+    model = KeyResult
     template_name = "objective_delete.html"
     success_url = "/keyresults/"
  ##may have to have the success URL be to objectives due to the one to many relationship
