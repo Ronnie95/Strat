@@ -1,0 +1,45 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'base.css' %}">
+<body>
+    {% if user.is_authenticated %}
+        <nav class="l navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Welcome: {{ user.username }}</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'goals' %}">Goals</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'reminders' %}">Reminders</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'transaction' %}">Transactions</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'income_list' %}">Income</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    {% else %}
+        <div class="navbar-menu navbar-end">
+            <a class="navbar-item" href="{% url 'login' %}">Log In</a>
+            <a class="navbar-item" href="{% url 'signup' %}">Sign Up</a>
+        </div>
+    {% endif %}
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
