@@ -32,7 +32,7 @@ class ObjectiveCreate(CreateView):
 
     def get_success_url(self):
         print(self.kwargs)
-        return reverse('goal_detail', kwargs={'pk': self.object.pk})
+        return reverse('objective_detail', kwargs={'pk': self.object.pk})
     
 @method_decorator(login_required, name='dispatch')
 class ObjectiveList(TemplateView):

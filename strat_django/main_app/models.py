@@ -7,7 +7,7 @@ class Objective(models.Model):
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=250)
     start_date = models.DateField()
-    end_date = models.DateField
+    end_date = models.DateField(default="2025-01-01")
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     category_Choices = (
         ("Not started", "Not started"),
