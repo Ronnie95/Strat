@@ -79,3 +79,48 @@ class Signup(View):
         else:
             context = {"form": form}
             return render(request, "registration/signup.html", context)
+
+
+@method_decorator(login_required, name='dispatch')
+class KeyResultCreate(CreateView):
+    model = KeyResult
+    fields = ['objective', 'description', 'target_value', 'current_value', 'deadline']
+    template_name = "keyresult_create.html"
+    success_url = "/keyresult/"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(ObjectiveCreate, self).form_valid(form)
+
+    def get_success_url(self):
+        print(self.kwargs)
+        return reverse('objective_detail', kwargs={'pk': self.object.pk})
+    
+@method_decorator(login_required, name='dispatch')
+class ObjectiveList(TemplateView):
+    template_name = "objectives.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["Objective"] = Objective.objects.all() # Here we are using the model to query the database for us.
+        return context
+    
+
+@method_decorator(login_required, name='dispatch')
+class ObjectiveDetail(DetailView):
+    model = Objective
+    template_name = "objective_detail.html"
+    
+    def get_queryset(self):
+        return Objective.objects.filter(user=self.request.user)
+    
+class ObjectiveUpdate(UpdateView):
+    model = Objective
+    fields = ['title', 'description', 'start_date', 'end_date', 'progress']
+    template_name = "objective_update.html"
+    success_url = "/objectives/"
+
+class ObjectiveDelete(DeleteView):
+    model = Objective
+    template_name = "objective_delete.html"
+    success_url = "/objectives/"
