@@ -1,11 +1,25 @@
 <h1>Objective Detail</h1>
-    <h2>{{ objective.category }}</h2>
-    <p>Target Amount: {{ objective.title }}</p>
-    <p>Target Date: {{ objective.description }}</p>
-    <p>Notes: {{ objective.start_date }}</p>
-    <p>Notes: {{ objective.end_date }}</p>
-    <p>Notes: {{ objective.progress }}</p>
-    <button><a href="{% url 'objective_update' objective.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
-    <button><a href="{% url 'objective_delete' objective.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
-    <button><a href="{% url 'keyresult_create' objective.id%}" class="btn btn-secondary btn-sm">New Key Result</a></button>
+<h2>{{ objective.category }}</h2>
+<p>Target Amount: {{ objective.title }}</p>
+<p>Target Date: {{ objective.description }}</p>
+<p>Notes: {{ objective.start_date }}</p>
+<p>Notes: {{ objective.end_date }}</p>
+<p>Notes: {{ objective.progress }}</p>
+<button><a href="{% url 'objective_update' objective.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
+<button><a href="{% url 'objective_delete' objective.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
+<button><a href="{% url 'keyresult_create' objective.id %}" class="btn btn-secondary btn-sm">New Key Result</a></button>
 
+{% if objective.keyresults.all %}
+  {% for keyresult in objective.keyresults.all %}
+    <div class="song">
+      <span>{{ forloop.counter }}</span>
+      <span><b>{{ keyresult.objective.title }}</b></span>  <!-- Objective title -->
+      <span>{{ keyresult.description }}</span>
+      <span><b>{{ keyresult.target_value }}</b></span>
+      <span>{{ keyresult.current_value }}</span>
+      <span><b>{{ keyresult.deadline }}</b></span>
+    </div>
+  {% endfor %}
+{% else %}
+  <p>No key results found for this objective.</p>
+{% endif %}

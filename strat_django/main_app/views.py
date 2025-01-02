@@ -48,6 +48,8 @@ class ObjectiveList(TemplateView):
 class ObjectiveDetail(DetailView):
     model = Objective
     template_name = "objective_detail.html"
+    context_object_name = 'objective'
+
     
     def get_queryset(self):
         return Objective.objects.filter(user=self.request.user)
