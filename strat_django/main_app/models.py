@@ -21,8 +21,8 @@ class Objective(models.Model):
         return self.title
 
 class KeyResult(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="key_results",)
-    objective = models.ForeignKey(Objective, on_delete=models.CASCADE, related_name="key_results")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="keyresults",)
+    objective = models.ForeignKey(Objective, on_delete=models.CASCADE, related_name="keyresults")
     description = models.CharField(max_length=250)
     target_value = models.FloatField()
     current_value = models.FloatField()

@@ -10,6 +10,8 @@ from django.utils.decorators import method_decorator
 from django.views.generic import DetailView
 from django.urls import reverse
 from django.views import View # <- View class to handle requests
+from django.views.generic import ListView
+
 
 
 # Create your views here.
@@ -98,16 +100,25 @@ class KeyResultCreate(CreateView):
         print(self.kwargs)
         return reverse('keyresult_detail', kwargs={'pk': self.object.pk})
     
-@method_decorator(login_required, name='dispatch')
-class KeyResultList(TemplateView):
-    template_name = "keyresults.html"
+#@method_decorator(login_required, name='dispatch')
+#class KeyResultList(TemplateView):
+ #   template_name = "keyresults.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["KeyResult"] = Objective.objects.all() # Here we are using the model to query the database for us.
-        return context
+  #  def get_context_data(self, **kwargs):
+  #      context = super().get_context_data(**kwargs)
+  #      context["KeyResult"] = KeyResult.objects.all() # Here we are using the model to query the database for us.
+   #     return context
     
+@method_decorator(login_required, name='dispatch')
+class KeyResultList(ListView):
+    model = KeyResult
+    template_name = "keyresults.html"
+    context_object_name = "key_results"  # Rename for clarity
 
+    def get_queryset(self):
+        # Return only the key results for the logged-in user
+        return KeyResult.objects.filter(user=self.request.user)
+    
 @method_decorator(login_required, name='dispatch')
 class KeyResultDetail(DetailView):
     model = KeyResult

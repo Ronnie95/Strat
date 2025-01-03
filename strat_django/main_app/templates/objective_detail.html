@@ -9,17 +9,13 @@
 <button><a href="{% url 'objective_delete' objective.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
 <button><a href="{% url 'keyresult_create' objective.id %}" class="btn btn-secondary btn-sm">New Key Result</a></button>
 
-{% if objective.keyresults.all %}
-  {% for keyresult in objective.keyresults.all %}
+  {% for keyresults in objective.keyresults.all %}
     <div class="song">
-      <span>{{ forloop.counter }}</span>
-      <span><b>{{ keyresult.objective.title }}</b></span>  <!-- Objective title -->
-      <span>{{ keyresult.description }}</span>
-      <span><b>{{ keyresult.target_value }}</b></span>
-      <span>{{ keyresult.current_value }}</span>
-      <span><b>{{ keyresult.deadline }}</b></span>
+      <span>{{ keyresults.objective.title }}</span>  <!-- Objective title -->
+      <span>{{ keyresults.description }}</span>
+      <span>{{ keyresults.target_value }}</span>
+      <span>{{ keyresults.current_value }}</span>
+      <span>{{ keyresults.deadline }}</span>
     </div>
   {% endfor %}
-{% else %}
   <p>No key results found for this objective.</p>
-{% endif %}
