@@ -31,3 +31,14 @@ class KeyResult(models.Model):
     def __str__(self):
         return self.description
 
+
+class Swot(models.Model):
+    categorys = [
+        ("Business", "Business"),
+        ("Project", "Project"),
+        ("Product", "Product"),
+        ("Team", "Team"),
+    ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="swots",)
+    name = models.CharField(max_length=100)
+    swot_categories = models.CharField(max_length=30, choices=categorys)
