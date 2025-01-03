@@ -4,3 +4,5 @@
 <h2>{{ swot.name }}</h2>
 <p>Target Amount: {{ swot.swot_categories }}</p>
 
+<button><a href="{% url 'swots_update' swot.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
+<button><a href="{% url 'swots_delete' swot.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>

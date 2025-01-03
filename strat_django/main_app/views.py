@@ -183,7 +183,7 @@ class SwotUpdate(UpdateView):
 
 class SwotDelete(DeleteView):
     model = Swot
-    template_name = "swot_delete.html"
+    template_name = "swots_delete.html"
     success_url = "/swots/"
 
 @method_decorator(login_required, name='dispatch')
