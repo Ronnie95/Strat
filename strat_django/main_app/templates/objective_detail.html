@@ -17,7 +17,7 @@
       <span>{{ keyresults.current_value }}</span>
       <span>{{ keyresults.deadline }}</span>
       <button><a href="{% url 'keyresult_update' objective.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
-<button><a href="{% url 'objective_delete' objective.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
+<button><a href="{% url 'keyresult_delete' objective.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
 <button><a href="{% url 'keyresult_create' objective.id %}" class="btn btn-secondary btn-sm">New Key Result</a></button>
 
     </div>
