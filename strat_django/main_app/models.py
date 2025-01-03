@@ -42,3 +42,16 @@ class Swot(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="swots",)
     name = models.CharField(max_length=100)
     swot_categories = models.CharField(max_length=30, choices=categorys)
+
+class SwotItem(models.Model):
+    swot_choices = [
+        ("Strengths", "Strenghts"),
+        ("Weakness", "Weakness"),
+        ("Opportunity", "Opportunity"),
+        ("Threat", "Threat")
+    ]
+
+    swots = models.ForeignKey(Swot, on_delete=models.CASCADE, related_name="items")
+    item_type = models.CharField(max_length=50, choices=swot_choices)
+    description = models.CharField(max_length=1000)
+
