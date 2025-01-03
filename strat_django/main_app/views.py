@@ -168,7 +168,7 @@ class SwotList(TemplateView):
 @method_decorator(login_required, name='dispatch')
 class SwotDetail(DetailView):
     model = Swot
-    template_name = "swot_detail.html"
+    template_name = "swots_detail.html"
     context_object_name = 'swot'
 
     
