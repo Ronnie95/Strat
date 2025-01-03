@@ -186,7 +186,21 @@ class SwotDelete(DeleteView):
     template_name = "swot_delete.html"
     success_url = "/swots/"
 
+@method_decorator(login_required, name='dispatch')
+class SwotItemCreate(CreateView):
+    model = SwotItem
+    fields = ['swots', 'item_type', "description"]
+    template_name = "swotitem_create.html"
+    success_url = "/swotitems/"
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(SwotItemCreate, self).form_valid(form)
+
+    def get_success_url(self):
+        print(self.kwargs)
+        return reverse('swotitem_detail', kwargs={'pk': self.object.pk})
+    
 @method_decorator(login_required, name='dispatch')
 class SwotItemList(ListView):
     model = SwotItem
