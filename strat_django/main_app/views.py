@@ -156,7 +156,7 @@ class SwotCreate(CreateView):
         return reverse('swots_detail', kwargs={'pk': self.object.pk})
     
 @method_decorator(login_required, name='dispatch')
-class ObjectiveList(TemplateView):
+class SwotList(TemplateView):
     template_name = "swots.html"
 
     def get_context_data(self, **kwargs):
@@ -181,7 +181,7 @@ class SwotUpdate(UpdateView):
     template_name = "swots_update.html"
     success_url = "/swots/"
 
-class ObjectiveDelete(DeleteView):
+class SwotDelete(DeleteView):
     model = Swot
     template_name = "swot_delete.html"
     success_url = "/swots/"
