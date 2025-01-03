@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse # <- a class to handle sending a type of response
 from django.views.generic.base import TemplateView
-from . models import Objective, KeyResult
+from . models import Objective, KeyResult, Swot, SwotItem
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -138,3 +138,50 @@ class KeyResultDelete(DeleteView):
     template_name = "objective_delete.html"
     success_url = "/keyresults/"
  ##may have to have the success URL be to objectives due to the one to many relationship
+
+
+@method_decorator(login_required, name='dispatch')
+class SwotCreate(CreateView):
+    model = Swot
+    fields = ['name', 'swot_categories']
+    template_name = "swots_create.html"
+    success_url = "/swots/"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(SwotCreate, self).form_valid(form)
+
+    def get_success_url(self):
+        print(self.kwargs)
+        return reverse('swots_detail', kwargs={'pk': self.object.pk})
+    
+@method_decorator(login_required, name='dispatch')
+class ObjectiveList(TemplateView):
+    template_name = "swots.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["Swot"] = Swot.objects.all() # Here we are using the model to query the database for us.
+        return context
+    
+
+@method_decorator(login_required, name='dispatch')
+class SwotDetail(DetailView):
+    model = Swot
+    template_name = "swot_detail.html"
+    context_object_name = 'swot'
+
+    
+    def get_queryset(self):
+        return Swot.objects.filter(user=self.request.user)
+    
+class SwotUpdate(UpdateView):
+    model = Swot
+    fields = ['name', 'swot_categories']
+    template_name = "swots_update.html"
+    success_url = "/swots/"
+
+class ObjectiveDelete(DeleteView):
+    model = Swot
+    template_name = "swot_delete.html"
+    success_url = "/swots/"
