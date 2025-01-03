@@ -185,3 +185,35 @@ class SwotDelete(DeleteView):
     model = Swot
     template_name = "swot_delete.html"
     success_url = "/swots/"
+
+
+@method_decorator(login_required, name='dispatch')
+class SwotItemList(ListView):
+    model = SwotItem
+    template_name = "swotitems.html"
+    context_object_name = "key_results"  # Rename for clarity
+
+    def get_queryset(self):
+        # Return only the key results for the logged-in user
+        return SwotItem.objects.filter(user=self.request.user)
+    
+@method_decorator(login_required, name='dispatch')
+class SwotItemDetail(DetailView):
+    model = SwotItem
+    template_name = "swotitem_detail.html"
+    
+    def get_queryset(self):
+        return SwotItem.objects.filter(user=self.request.user)
+    
+class SwotItemUpdate(UpdateView):
+    model = SwotItem
+    fields = ['swots', 'item_type', 'description']
+    template_name = "swotitem_update.html"
+    success_url = "/swotitems/"
+
+class SwotItemDelete(DeleteView):
+    model = SwotItem
+    template_name = "swotitem_delete.html"
+    success_url = "/swotitems/"
+ ##may have to have the success URL be to objectives due to the one to many relationship
+
