@@ -4,6 +4,7 @@ from . import views
 # this like app.use() in express
 urlpatterns = [
     path('', views.Home.as_view(), name="home"), # <- here we have added the new path
+    path('roadmaps/', views.Home.as_view(), name="home"), # <- here we have added the new path
     path('objectives/', views.ObjectiveList.as_view(), name='objectives'),
     path('objectives/new/', views.ObjectiveCreate.as_view(), name='objective_create'),
     path('objectives/<int:pk>', views.ObjectiveDetail.as_view(), name='objective_detail'),
@@ -25,5 +26,7 @@ urlpatterns = [
     path('keyresults/<int:pk>', views.KeyResultDetail.as_view(), name='keyresult_detail'),
     path('keyresults/<int:pk>/update', views.KeyResultUpdate.as_view(), name='keyresult_update'),
     path('keyresults/<int:pk>/delete', views.KeyResultDelete.as_view(), name='keyresult_delete'),
+    path('keyresults/<int:pk>/delete', views.KeyResultDelete.as_view(), name='keyresult_delete'),
+
 ]
     
