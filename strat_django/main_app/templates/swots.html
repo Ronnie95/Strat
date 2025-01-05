@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block content %}
 <container class="con">
     <h1>Welcome to Swots</h1>
     {% for swots in Swot %}
@@ -14,3 +15,4 @@
           {% empty %}
       {% endfor %}
   </container>
+  {% endblock %}
