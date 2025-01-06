@@ -56,10 +56,15 @@ class SwotItem(models.Model):
     description = models.CharField(max_length=1000)
 
 class MindMap(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="SwotItem", default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="mindmap", )
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.name
-    
+
+class Ideas(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="ideas",)
+    mindmap = models.ForeignKey(MindMap, on_delete=models.CASCADE, related_name="ideas")
+    title = models.CharField(max_length=50)
+    description = models.TextField(blank=True, null=True)
