@@ -1,6 +1,8 @@
 from django.contrib import admin
-from . models import Objective, KeyResult
+from . models import Objective, KeyResult, Swot, SwotItem
 # Register your models here.
 
 admin.site.register(Objective)
 admin.site.register(KeyResult)
+admin.site.register(SwotItem)
+admin.site.register(Swot)
