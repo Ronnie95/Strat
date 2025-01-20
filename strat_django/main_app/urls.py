@@ -33,11 +33,10 @@ urlpatterns = [
     path('keyresults/<int:pk>/delete', views.KeyResultDelete.as_view(), name='keyresult_delete'),
     path('keyresults/<int:pk>/delete', views.KeyResultDelete.as_view(), name='keyresult_delete'),
     path('ideas/', views.IdeaList.as_view(), name='ideas'),
-    path('keyresults/new/<int:objective_id>/', views.KeyResultCreate.as_view(), name='keyresult_create'),
-    path('keyresults/<int:pk>', views.KeyResultDetail.as_view(), name='keyresult_detail'),
-    path('keyresults/<int:pk>/update', views.KeyResultUpdate.as_view(), name='keyresult_update'),
-    path('keyresults/<int:pk>/delete', views.KeyResultDelete.as_view(), name='keyresult_delete'),
-    path('keyresults/<int:pk>/delete', views.KeyResultDelete.as_view(), name='keyresult_delete'),
+    path('ideas/new/<int:mindmap_id>/', views.IdeaCreate.as_view(), name='idea_create'),
+    path('ideas/<int:pk>', views.IdeaDetail.as_view(), name='idea_detail'),
+    path('ideas/<int:pk>/update', views.IdeaUpdate.as_view(), name='idea_update'),
+    path('ideas/<int:pk>/delete', views.IdeaDelete.as_view(), name='idea_delete'),
 
 
 ]

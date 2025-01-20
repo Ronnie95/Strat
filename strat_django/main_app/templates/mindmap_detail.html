@@ -3,3 +3,17 @@
 <p>Target Amount: {{ mindmap.description }}</p>
 <button><a href="{% url 'mindmap_update' mindmap.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
 <button><a href="{% url 'mindmap_delete' mindmap.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
+
+
+{% for idea in mindmap.ideas.all %}
+<div class="song">
+  <span>{{ idea.mindmap.name }}</span>  <!-- Objective title -->
+  <span>{{ idea.title }}</span>
+  <span>{{ keyresults.description }}</span>
+  <button><a href="{% url 'keyresult_update' objective.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
+<button><a href="{% url 'keyresult_delete' objective.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
+<button><a href="{% url 'keyresult_create' objective.id %}" class="btn btn-secondary btn-sm">New Key Result</a></button>
+
+</div>
+{% endfor %}
+<p>No key results found for this objective.</p>
