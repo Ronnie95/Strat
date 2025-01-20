@@ -281,3 +281,49 @@ class MindMapDelete(DeleteView):
     model = MindMap
     template_name = "mindmap_delete.html"
     success_url = "/mindmaps/"
+
+
+@method_decorator(login_required, name='dispatch')
+class IdeaCreate(CreateView):
+    model = Ideas
+    fields = ['mindmap', 'title', "description"]
+    template_name = "idea_create.html"
+    success_url = "/mindmaps/"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(IdeaCreate, self).form_valid(form)
+
+    def get_success_url(self):
+        print(self.kwargs)
+        return reverse('idea_detail', kwargs={'pk': self.object.pk})
+    
+@method_decorator(login_required, name='dispatch')
+class IdeaList(ListView):
+    model = Ideas
+    template_name = "ideas.html"
+    context_object_name = "mindmaps"  # Rename for clarity
+
+    def get_queryset(self):
+        # Return only the key results for the logged-in user
+        return Ideas.objects.filter(user=self.request.user)
+    
+@method_decorator(login_required, name='dispatch')
+class IdeaDetail(DetailView):
+    model = Ideas
+    template_name = "idea_detail.html"
+    
+    def get_queryset(self):
+        return Ideas.objects.filter(user=self.request.user)
+    
+class IdeaUpdate(UpdateView):
+    model = Ideas
+    fields = ['mindmap', 'title', 'description']
+    template_name = "idea_update.html"
+    success_url = "/ideas/"
+
+class IdeaDelete(DeleteView):
+    model = Ideas
+    template_name = "idea_delete.html"
+    success_url = "/ideas/"
+ ##may have to have the success URL be to objectives due to the one to many relationship
