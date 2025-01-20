@@ -1,0 +1,12 @@
+<div class="mb-3">
+
+    <div class="mb-3 container">
+      <br/><br/>
+      <form action="" method="post">
+          <div class="form-group">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <input type="submit" value="Submit" class="btn btn-primary" />
+          </div>
+      </form>
+  </div>
