@@ -3,6 +3,7 @@
 <p>Target Amount: {{ mindmap.description }}</p>
 <button><a href="{% url 'mindmap_update' mindmap.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
 <button><a href="{% url 'mindmap_delete' mindmap.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
+<button><a href="{% url 'idea_create' mindmap.id %}" class="btn btn-secondary btn-sm">New Idea</a></button>
 
 
 {% for idea in mindmap.ideas.all %}
