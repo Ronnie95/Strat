@@ -1,12 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>hello</h1>
+<h1>SWOTS</h1>
 
-<h1>Objective Detail</h1>
 <h2>{{ swot.name }}</h2>
-<p>Target Amount: {{ swot.swot_categories }}</p>
+<p>Swot Category: {{ swot.swot_categories }}</p>
 
 <button><a href="{% url 'swots_update' swot.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
 <button><a href="{% url 'swots_delete' swot.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
-{% endblock %}
+<button><a href="{% url 'swotitem_create' swot.id %}" class="btn btn-secondary btn-sm">New Swot Item</a></button>
+
+ {% for items in swot.items.all %}
+<div class="song">
+  <span>{{ items.swot.name }}</span>  <!-- Objective title -->
+  <span>{{ items.item_type }}</span>
+  <span>{{ items.description }}</span>
+  <button><a href="{% url 'swotitem_update' swot.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
+<button><a href="{% url 'swotitem_delete' swot.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
+</div>
+{% endfor %}
+<h1>hello</h1>
+{% endblock %} 
