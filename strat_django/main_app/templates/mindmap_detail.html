@@ -9,10 +9,10 @@
 <div class="song">
   <span>{{ idea.mindmap.name }}</span>  <!-- Objective title -->
   <span>{{ idea.title }}</span>
-  <span>{{ keyresults.description }}</span>
-  <button><a href="{% url 'keyresult_update' objective.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
-<button><a href="{% url 'keyresult_delete' objective.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
-<button><a href="{% url 'keyresult_create' objective.id %}" class="btn btn-secondary btn-sm">New Key Result</a></button>
+  <span>{{ idea.description }}</span>
+<button><a href="{% url 'idea_update' mindmap.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
+<button><a href="{% url 'idea_delete' mindmap.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
+<button><a href="{% url 'idea_create' mindmap.id %}" class="btn btn-secondary btn-sm">New Key Result</a></button>
 
 </div>
 {% endfor %}
