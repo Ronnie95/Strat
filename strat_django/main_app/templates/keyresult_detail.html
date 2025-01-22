@@ -1,6 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
 <h1>Objective Detail</h1>
 <h2>{{ keyresult.objective }}</h2>
 <p>Target Amount: {{ keyresult.description }}</p>
 <p>Target Date: {{ keyresult.target_value }}</p>
 <p>Notes: {{ keyresult.current_value }}</p>
 <p>Notes: {{ keyresult.deadline }}</p>
+{% endblock %}

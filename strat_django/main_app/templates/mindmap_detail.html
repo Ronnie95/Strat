@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 <h1>Objective Detail</h1>
 <h2>{{ mindmap.name }}</h2>
 <p>Target Amount: {{ mindmap.description }}</p>
@@ -18,3 +20,4 @@
 </div>
 {% endfor %}
 <p>No key results found for this objective.</p>
+{% endblock %}
