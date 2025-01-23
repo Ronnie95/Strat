@@ -11,6 +11,7 @@ from django.views.generic import DetailView
 from django.urls import reverse
 from django.views import View # <- View class to handle requests
 from django.views.generic import ListView
+from .forms import UploadFileForm
 
 
 
@@ -327,3 +328,15 @@ class IdeaDelete(DeleteView):
     template_name = "idea_delete.html"
     success_url = "/ideas/"
  ##may have to have the success URL be to objectives due to the one to many relationship
+
+
+def upload_file(request):
+    if request.method == 'POST' and request.FILES['file']:
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('upload_success')  # Redirect after successful upload
+    else:
+        form = UploadFileForm()
+
+    return render(request, 'upload.html', {'form': form})
