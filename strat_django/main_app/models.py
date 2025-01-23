@@ -68,3 +68,12 @@ class Ideas(models.Model):
     mindmap = models.ForeignKey(MindMap, on_delete=models.CASCADE, related_name="ideas")
     title = models.CharField(max_length=50)
     description = models.TextField(blank=True, null=True)
+
+
+class Roadmap(models.Model):
+    title = models.CharField(max_length=50)
+    file = models.FileField(upload_to='documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
