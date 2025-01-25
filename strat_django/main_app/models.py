@@ -71,6 +71,7 @@ class Ideas(models.Model):
 
 
 class Roadmap(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="roadmap",)
     title = models.CharField(max_length=50)
     file = models.FileField(upload_to='documents/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
