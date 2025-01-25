@@ -4,7 +4,8 @@ from . import views
 # this like app.use() in express
 urlpatterns = [
     path('', views.Home.as_view(), name="home"), # <- here we have added the new path
-    path('roadmaps/', views.upload_file, name='upload_file'),
+    path('upload/', views.upload_file, name='upload_file'),
+    path('roadmaps/', views.upload_file, name='roadmaps'),
     path('objectives/', views.ObjectiveList.as_view(), name='objectives'),
     path('objectives/new/', views.ObjectiveCreate.as_view(), name='objective_create'),
     path('objectives/<int:pk>', views.ObjectiveDetail.as_view(), name='objective_detail'),
