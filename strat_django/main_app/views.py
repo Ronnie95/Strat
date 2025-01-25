@@ -23,7 +23,7 @@ class Home(TemplateView):
 
 @method_decorator(login_required, name='dispatch')
 class Roadmap(TemplateView):
-    template_name = "home.html"
+    template_name = "roadmaps.html"
 
 
 

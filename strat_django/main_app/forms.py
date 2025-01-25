@@ -1,6 +1,6 @@
 from django import forms
 from .models import Roadmap
 
-class UploadFileForm(forms.Form):
+class UploadFileForm(forms.ModelForm):
     model = Roadmap
     fields = ['title', 'file']
