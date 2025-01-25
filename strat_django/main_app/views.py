@@ -331,12 +331,13 @@ class IdeaDelete(DeleteView):
 
 
 def upload_file(request):
-    if request.method == 'POST' and request.FILES['file']:
+    if request.method == 'POST':
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('upload_success')  # Redirect after successful upload
+            roadmap = form.save(commit=False)
+            roadmap.user = request.user  # Assign the current user
+            roadmap.save()
+            return redirect('success')  # Replace with your success page or URL name
     else:
         form = UploadFileForm()
-
-    return render(request, 'upload.html', {'form': form})
+    return render(request, 'roadmaps.html', {'form': form})
