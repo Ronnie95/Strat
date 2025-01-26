@@ -1,0 +1,15 @@
+h1 {
+    color: black;
+}
+
+.con {
+    display: flex;
+    gap: 50px;
+
+
+}
+
+.card {
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+
+}

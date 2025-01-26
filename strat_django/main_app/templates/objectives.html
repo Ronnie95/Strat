@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-<container class="con">
+{% load static %}
+<link rel="stylesheet" href="{% static 'objective.css' %}">
+
     <h1>Welcome to objectives</h1>
+    <container class="con">
     {% for objective in Objective %}
           <div class="card" style="width: 18rem;">
-            <div class="card-body">
+            <div class="card">
                 <h5 class="card-title">{{objective.title}}</h5>
                 <h6 class="card-subtitle mb-2 text-body-secondary">{{objective.description}}</h6>
                 <h6 class="card-subtitle mb-2 text-body-secondary">${{objective.start_date}}</h6>
