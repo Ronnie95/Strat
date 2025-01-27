@@ -3,22 +3,23 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'objective.css' %}">
 
-    <h1>Welcome to objectives</h1>
-    <container class="con">
-    {% for objective in Objective %}
-          <div class="card" style="width: 18rem;">
-            <div class="card">
-                <h5 class="card-title">{{objective.title}}</h5>
-                <h6 class="card-subtitle mb-2 text-body-secondary">{{objective.description}}</h6>
-                <h6 class="card-subtitle mb-2 text-body-secondary">{{objective.start_date}}</h6>
-                <h6 class="card-subtitle mb-2 text-body-secondary">{{objective.end_date}}</h6>
-                <h6 class="card-subtitle mb-2 text-body-secondary">{{objective.start_date}}</h6>
-                <h6 class="card-subtitle mb-2 text-body-secondary">{{objective.progress}}</h6>
-                <a href="{% url 'objective_detail' objective.pk %}" class="btn btn-secondary btn-sm">View objective</a>
+<h1>Welcome to Objectives</h1>
 
-              </div>
+<container class="con">
+    {% for objective in Objective %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ objective.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">{{ objective.description }}</h6>
+                <h6 class="card-subtitle mb-2 text-body-secondary">Start Date: {{ objective.start_date }}</h6>
+                <h6 class="card-subtitle mb-2 text-body-secondary">End Date: {{ objective.end_date }}</h6>
+                <h6 class="card-subtitle mb-2 text-body-secondary">Progress: {{ objective.progress }}</h6>
+                <a href="{% url 'objective_detail' objective.pk %}" class="btn btn-secondary btn-sm">View Objective</a>
             </div>
-          {% empty %}
-      {% endfor %}
-  </container>
-  {% endblock %}
+        </div>
+    {% empty %}
+        <p>No objectives available.</p>
+    {% endfor %}
+</container>
+
+{% endblock %}

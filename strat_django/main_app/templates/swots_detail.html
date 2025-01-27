@@ -3,21 +3,49 @@
 
 <h1>SWOTS</h1>
 
-<h2>{{ swot.name }}</h2>
-<p>Swot Category: {{ swot.swot_categories }}</p>
-
-<button><a href="{% url 'swots_update' swot.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
-<button><a href="{% url 'swots_delete' swot.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
-<button><a href="{% url 'swotitem_create' swot.id %}" class="btn btn-secondary btn-sm">New Swot Item</a></button>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{ swot.name }}</h5>
+    <h6 class="card-subtitle mb-2 text-body-secondary">{{ swot.swot_categories }}</h6>
+    <div class="d-flex gap-2">
+      <a href="{% url 'swots_update' swot.pk %}" class="btn btn-secondary btn-sm">Edit</a>
+      <a href="{% url 'swots_delete' swot.pk %}" class="btn btn-danger btn-sm">Delete</a>
+      <a href="{% url 'swotitem_create' swot.id %}" class="btn btn-primary btn-sm">New Key Result</a>
+    </div>
+  </div>
+</div>
 
  {% for items in swot.items.all %}
-<div class="song">
-  <span>{{ items.swot.name }}</span>  <!-- Objective title -->
-  <span>{{ items.item_type }}</span>
-  <span>{{ items.description }}</span>
-  <button><a href="{% url 'swotitem_update' items.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
-<button><a href="{% url 'swotitem_delete' items.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
+<div class="accordion mt-3" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+      <button 
+        class="accordion-button" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#collapse{{ forloop.counter }}" 
+        aria-expanded="true" 
+        aria-controls="collapse{{ forloop.counter }}">
+        {{ items.swot.name }}
+      </button>
+    </h2>
+    <div 
+      id="collapse{{ forloop.counter }}" 
+      class="accordion-collapse collapse show" 
+      data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <p>{{ keyresults.description }}</p>
+        <p>{{ items.item_type }}</p>
+        <p>{{ items.description }}</p>
+        <p>Deadline: {{ keyresults.deadline }}</p>
+        <div class="d-flex gap-2">
+          <a href="{% url 'swotitem_update' items.pk %}" class="btn btn-secondary btn-sm">Edit</a>
+          <a href="{% url 'swotitem_delete' items.pk %}" class="btn btn-danger btn-sm">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 {% endfor %}
-<h1>hello</h1>
 {% endblock %} 
