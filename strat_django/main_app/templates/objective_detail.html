@@ -1,37 +1,53 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load bootstrap5 %}
 
-<h1>Objective </h1>
-<h2>{{ objective.category }}</h2>
-<p> {{ objective.title }}</p>
-<p>{{ objective.description }}</p>
-<p> Start Date: {{ objective.start_date }}</p>
-<p> End Date: {{ objective.end_date }}</p>
-<p> Status: {{ objective.progress }}</p>
-<button><a href="{% url 'objective_update' objective.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
-<button><a href="{% url 'objective_delete' objective.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
-<button><a href="{% url 'keyresult_create' objective.id %}" class="btn btn-secondary btn-sm">New Key Result</a></button>
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{ objective.title }}</h5>
+    <h6 class="card-subtitle mb-2 text-body-secondary">{{ objective.description }}</h6>
+    <h6 class="card-subtitle mb-2 text-body-secondary">{{ objective.start_date }}</h6>
+    <h6 class="card-subtitle mb-2 text-body-secondary">{{ objective.end_date }}</h6>
+    <h6 class="card-subtitle mb-2 text-body-secondary">{{ objective.progress }}</h6>
+    <div class="d-flex gap-2">
+      <a href="{% url 'objective_update' objective.pk %}" class="btn btn-secondary btn-sm">Edit</a>
+      <a href="{% url 'objective_delete' objective.pk %}" class="btn btn-danger btn-sm">Delete</a>
+      <a href="{% url 'keyresult_create' objective.id %}" class="btn btn-primary btn-sm">New Key Result</a>
+    </div>
+  </div>
+</div>
 
-  {% for keyresults in objective.keyresults.all %}
-  
-<div class="accordion" id="accordionExample">
+{% for keyresults in objective.keyresults.all %}
+<div class="accordion mt-3" id="accordionExample">
   <div class="accordion-item">
-    <h2 class="accordion-header">
-      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-       {{ keyresults.objective.title }}     </button>
+    <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+      <button 
+        class="accordion-button" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#collapse{{ forloop.counter }}" 
+        aria-expanded="true" 
+        aria-controls="collapse{{ forloop.counter }}">
+        {{ keyresults.objective.title }}
+      </button>
     </h2>
-    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+    <div 
+      id="collapse{{ forloop.counter }}" 
+      class="accordion-collapse collapse show" 
+      data-bs-parent="#accordionExample">
       <div class="accordion-body">
-        {{ keyresults.description }} <br> {{ keyresults.target_value }} <br>  {{ keyresults.current_value }}  <br> {{ keyresults.deadline }} <br>
-        <button><a href="{% url 'keyresult_update' keyresults.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
-        <button><a href="{% url 'keyresult_delete' keyresults.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
-
+        <p>{{ keyresults.description }}</p>
+        <p>Target Value: {{ keyresults.target_value }}</p>
+        <p>Current Value: {{ keyresults.current_value }}</p>
+        <p>Deadline: {{ keyresults.deadline }}</p>
+        <div class="d-flex gap-2">
+          <a href="{% url 'keyresult_update' keyresults.pk %}" class="btn btn-secondary btn-sm">Edit</a>
+          <a href="{% url 'keyresult_delete' keyresults.pk %}" class="btn btn-danger btn-sm">Delete</a>
+        </div>
       </div>
     </div>
   </div>
-
-  </div>
 </div>
-    </div>
-  {% endfor %}
-  {% endblock %}
+{% endfor %}
+
+{% endblock %}
