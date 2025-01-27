@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Objective Detail</h1>
+<h1>Objective </h1>
 <h2>{{ objective.category }}</h2>
-<p>Target Amount: {{ objective.title }}</p>
-<p>Target Date: {{ objective.description }}</p>
-<p>Notes: {{ objective.start_date }}</p>
-<p>Notes: {{ objective.end_date }}</p>
-<p>Notes: {{ objective.progress }}</p>
+<p> {{ objective.title }}</p>
+<p>{{ objective.description }}</p>
+<p> Start Date: {{ objective.start_date }}</p>
+<p> End Date: {{ objective.end_date }}</p>
+<p> Status: {{ objective.progress }}</p>
 <button><a href="{% url 'objective_update' objective.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
 <button><a href="{% url 'objective_delete' objective.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
 <button><a href="{% url 'keyresult_create' objective.id %}" class="btn btn-secondary btn-sm">New Key Result</a></button>
@@ -24,5 +24,4 @@
 
     </div>
   {% endfor %}
-  <p>No key results found for this objective.</p>
   {% endblock %}

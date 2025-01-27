@@ -132,7 +132,7 @@ class KeyResultUpdate(UpdateView):
     model = KeyResult
     fields = ['objective', 'description', 'target_value', 'current_value', 'deadline']
     template_name = "keyresult_update.html"
-    success_url = "/keyresults/"
+    success_url = "/objectives/"
 
 class KeyResultDelete(DeleteView):
     model = KeyResult
