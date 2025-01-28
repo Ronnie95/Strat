@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Objective Detail</h1>
+<h1>Mind Map</h1>
 
 <div class="card" style="width: 18rem;">
   <div class="card-body">
@@ -9,7 +9,7 @@
     <div class="d-flex gap-2">
       <a href="{% url 'mindmap_update' mindmap.pk %}" class="btn btn-secondary btn-sm">Edit</a>
       <a href="{% url 'mindmap_delete' mindmap.pk %}" class="btn btn-danger btn-sm">Delete</a>
-      <a href="{% url 'idea_create' mindmap.id %}" class="btn btn-primary btn-sm">New Key Result</a>
+      <a href="{% url 'idea_create' mindmap.id %}" class="btn btn-secondary btn-sm">New Key Result</a>
     </div>
   </div>
 </div>
