@@ -332,7 +332,7 @@ def upload_file(request):
             roadmap = form.save(commit=False)
             roadmap.user = request.user  # Assign the current user
             roadmap.save()
-            return redirect('success')  # Replace with your success page or URL name
+            return redirect('home')  # Replace with your success page or URL name
     else:
         form = UploadFileForm()
     return render(request, 'roadmaps.html', {'form': form})
