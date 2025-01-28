@@ -15,14 +15,7 @@
 </div>
 
 {% for idea in mindmap.ideas.all %}
-<div class="song">
-  <span>{{ idea.mindmap.name }}</span>  <!-- Objective title -->
-  <span>{{ idea.title }}</span>
-  <span>{{ idea.description }}</span>
-<button><a href="{% url 'idea_update' mindmap.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
-<button><a href="{% url 'idea_delete' mindmap.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
-<button><a href="{% url 'idea_create' mindmap.id %}" class="btn btn-secondary btn-sm">New Key Result</a></button>
-</div>
+
 <div class="accordion mt-3" id="accordionExample">
   <div class="accordion-item">
     <h2 class="accordion-header" id="heading{{ forloop.counter }}">
