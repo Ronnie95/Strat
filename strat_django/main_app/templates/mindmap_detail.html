@@ -1,12 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Objective Detail</h1>
-<h2>{{ mindmap.name }}</h2>
-<p>Target Amount: {{ mindmap.description }}</p>
-<button><a href="{% url 'mindmap_update' mindmap.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
-<button><a href="{% url 'mindmap_delete' mindmap.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
-<button><a href="{% url 'idea_create' mindmap.id %}" class="btn btn-secondary btn-sm">New Idea</a></button>
 
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{ mindmap.name }}</h5>
+    <h6 class="card-subtitle mb-2 text-body-secondary">{{ mindmap.description }}</h6>
+    <div class="d-flex gap-2">
+      <a href="{% url 'mindmap_update' mindmap.pk %}" class="btn btn-secondary btn-sm">Edit</a>
+      <a href="{% url 'mindmap_delete' mindmap.pk %}" class="btn btn-danger btn-sm">Delete</a>
+      <a href="{% url 'idea_create' mindmap.id %}" class="btn btn-primary btn-sm">New Key Result</a>
+    </div>
+  </div>
+</div>
 
 {% for idea in mindmap.ideas.all %}
 <div class="song">
@@ -16,8 +22,33 @@
 <button><a href="{% url 'idea_update' mindmap.pk %}" class="btn btn-secondary btn-sm">Edit</a></button>
 <button><a href="{% url 'idea_delete' mindmap.pk %}" class="btn btn-secondary btn-sm">Delete</a></button>
 <button><a href="{% url 'idea_create' mindmap.id %}" class="btn btn-secondary btn-sm">New Key Result</a></button>
-
 </div>
+<div class="accordion mt-3" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+      <button 
+        class="accordion-button" 
+        type="button" 
+        data-bs-toggle="collapse" 
+        data-bs-target="#collapse{{ forloop.counter }}" 
+        aria-expanded="true" 
+        aria-controls="collapse{{ forloop.counter }}">
+        {{ idea.mindmap.name }}
+      </button>
+    </h2>
+    <div 
+      id="collapse{{ forloop.counter }}" 
+      class="accordion-collapse collapse show" 
+      data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <p>{{ idea.title }}</p>
+        <p> {{ idea.description }}</p>
+        <div class="d-flex gap-2">
+          <a href="{% url 'idea_update' mindmap.pk %}" class="btn btn-secondary btn-sm">Edit</a>
+          <a href="{% url 'idea_delete' mindmap.pk %}" class="btn btn-danger btn-sm">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endfor %}
-<p>No key results found for this objective.</p>
 {% endblock %}
