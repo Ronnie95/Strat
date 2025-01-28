@@ -11,7 +11,7 @@ from django.views.generic import DetailView
 from django.urls import reverse
 from django.views import View # <- View class to handle requests
 from django.views.generic import ListView
-from .forms import UploadFileForm
+from .forms import UploadFileForm, IdeaForm
 
 
 
@@ -282,17 +282,18 @@ class MindMapDelete(DeleteView):
 @method_decorator(login_required, name='dispatch')
 class IdeaCreate(CreateView):
     model = Ideas
-    fields = ['mindmap', 'title', "description"]
+    form_class = IdeaForm  # Use the custom form
     template_name = "idea_create.html"
     success_url = "/mindmaps/"
 
     def form_valid(self, form):
+        # Automatically set the user for the idea
         form.instance.user = self.request.user
         return super(IdeaCreate, self).form_valid(form)
 
     def get_success_url(self):
-        print(self.kwargs)
-        return reverse('idea_detail', kwargs={'pk': self.object.pk})
+        # Redirect to a specific page after successful form submission
+        return reverse('mindmap_detail', kwargs={'pk': self.object.mindmap.pk})
     
 @method_decorator(login_required, name='dispatch')
 class IdeaList(ListView):
@@ -336,3 +337,16 @@ def upload_file(request):
     else:
         form = UploadFileForm()
     return render(request, 'roadmaps.html', {'form': form})
+
+def create_idea(request):
+    if request.method == 'POST':
+        form = IdeaForm(request.POST)
+        if form.is_valid():
+            idea = form.save(commit=False)
+            idea.user = request.user  # Assign the logged-in user
+            idea.save()
+            return redirect('mindmap_detail', pk=idea.mindmap.pk)
+    else:
+        form = IdeaForm()
+    
+    return render(request, 'idea_create.html', {'form': form})
