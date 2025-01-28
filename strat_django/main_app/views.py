@@ -11,7 +11,7 @@ from django.views.generic import DetailView
 from django.urls import reverse
 from django.views import View # <- View class to handle requests
 from django.views.generic import ListView
-from .forms import UploadFileForm, IdeaForm
+from .forms import UploadFileForm, IdeaForm, KeyresultForm
 
 
 
@@ -100,6 +100,23 @@ class KeyResultCreate(CreateView):
     def get_success_url(self):
         print(self.kwargs)
         return reverse('keyresult_detail', kwargs={'pk': self.object.pk})
+    
+
+@method_decorator(login_required, name='dispatch')
+class KeyResultCreate(CreateView):
+    model = KeyResult
+    form_class = KeyresultForm  # Use the custom form
+    template_name = "keyresult_create.html"
+    success_url = "/keyresult/"
+
+    def form_valid(self, form):
+        # Automatically set the user for the idea
+        form.instance.user = self.request.user
+        return super(KeyResultCreate, self).form_valid(form)
+
+    def get_success_url(self):
+        # Redirect to a specific page after successful form submission
+        return reverse('objective_detail', kwargs={'pk': self.object.objective.pk})
     
 #@method_decorator(login_required, name='dispatch')
 #class KeyResultList(TemplateView):
